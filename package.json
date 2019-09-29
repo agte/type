@@ -1,0 +1,52 @@
+{
+  "name": "@agte/type",
+  "version": "0.0.1",
+  "description": "Simple type check library",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --experimental-modules test/type.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agte/type.git"
+  },
+  "keywords": [
+    "type",
+    "check",
+    "validation"
+  ],
+  "author": "Anna Agte <matiasrustagte@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agte/type/issues"
+  },
+  "homepage": "https://github.com/agte/type#readme",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "type": "module",
+  "eslintConfig": {
+    "env": {
+      "es6": true, 
+      "node": true
+    },
+    "extends": "airbnb-base",
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "rules": {
+    }
+  }
+}
