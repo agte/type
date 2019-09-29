@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "lint": "eslint",
     "test": "node --experimental-modules test/type.test.js"
   },
   "repository": {
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/agte/type#readme",
   "devDependencies": {
+    "eslint": "^6.5.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2"
   },
@@ -34,7 +36,7 @@
   "type": "module",
   "eslintConfig": {
     "env": {
-      "es6": true, 
+      "es6": true,
       "node": true
     },
     "extends": "airbnb-base",
@@ -47,6 +49,7 @@
       "sourceType": "module"
     },
     "rules": {
+      "import/extensions": ["error", "ignorePackages"]
     }
   }
 }
