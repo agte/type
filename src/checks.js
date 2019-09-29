@@ -1,9 +1,9 @@
 const msg = (expected, got) => (got ? `expected ${expected}, got ${got}` : `expected ${expected}`);
 
-const isString = value => typeof value === 'string';
-const isNumber = value => typeof value === 'number' && Number.isFinite(value);
-const isBoolean = value => typeof value === 'boolean';
-const isObject = value => typeof value === 'object' && value !== null;
+const isString = (value) => typeof value === 'string';
+const isNumber = (value) => typeof value === 'number' && Number.isFinite(value);
+const isBoolean = (value) => typeof value === 'boolean';
+const isObject = (value) => typeof value === 'object' && value !== null;
 
 export default {
   string(value) {
@@ -15,7 +15,7 @@ export default {
     if (!Array.isArray(value)) {
       throw new TypeError(msg('array', `(${typeof value}) ${value}`));
     }
-    if (!value.every(item => isString(item))) {
+    if (!value.every((item) => isString(item))) {
       throw new TypeError(msg('only strings'));
     }
   },
@@ -29,7 +29,7 @@ export default {
     if (!Array.isArray(value)) {
       throw new TypeError(msg('array', `(${typeof value}) ${value}`));
     }
-    if (!value.every(item => isNumber(item))) {
+    if (!value.every((item) => isNumber(item))) {
       throw new TypeError(msg('only numbers'));
     }
   },
@@ -43,7 +43,7 @@ export default {
     if (!Array.isArray(value)) {
       throw new TypeError(msg('array', `(${typeof value}) ${value}`));
     }
-    if (!value.every(item => isBoolean(item))) {
+    if (!value.every((item) => isBoolean(item))) {
       throw new TypeError(msg('only booleans'));
     }
   },
@@ -57,7 +57,7 @@ export default {
     if (!Array.isArray(value)) {
       throw new TypeError(msg('array', typeof value));
     }
-    if (!value.every(item => isObject(item))) {
+    if (!value.every((item) => isObject(item))) {
       throw new TypeError(msg('only objects'));
     }
   },

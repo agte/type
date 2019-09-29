@@ -1,5 +1,7 @@
 import type from '../index.js';
 
+/* eslint-disable no-console, no-new-wrappers */
+
 let failures = 0;
 
 const notThrows = (f) => {
@@ -8,7 +10,7 @@ const notThrows = (f) => {
     console.log('- PASSED');
   } catch (e) {
     console.log('- FAILED', e.message);
-    failures++;
+    failures += 1;
   }
 };
 
@@ -19,12 +21,12 @@ const throws = (f) => {
   } catch (e) {
     if (e.message === 'TEST_FAILED') {
       console.log('- FAILED', 'must throw an error, but did not');
-      failures++;
+      failures += 1;
     } else {
       console.log('- PASSED');
     }
   }
-}
+};
 
 console.log('string');
 notThrows(() => type.string('abc'));
@@ -41,9 +43,8 @@ throws(() => type.string(undefined));
 console.log('strings');
 notThrows(() => type.strings(['abc', 'def']));
 notThrows(() => type.strings([]));
-notThrows(() => type.strings(new Array()));
 throws(() => type.strings({}));
-throws(() => type.strings({ '0': 'abc', '1': 'def' }));
+throws(() => type.strings({ 0: 'abc', 1: 'def' }));
 throws(() => type.strings(['abc', 12]));
 throws(() => type.strings(null));
 throws(() => type.strings(undefined));
