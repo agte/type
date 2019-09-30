@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "node ./node_modules/eslint/bin/eslint . --max-warnings=0",
+    "lint": "eslint .",
+    "format": "eslint --fix .",
     "test": "ava"
   },
   "repository": {
