@@ -1,117 +1,93 @@
+/* eslint-disable no-new-wrappers */
+import test from 'ava';
 import type from '../index.js';
 
-/* eslint-disable no-console, no-new-wrappers */
+test('string', (t) => {
+  t.notThrows(() => type.string('abc'));
+  t.notThrows(() => type.string(''));
+  t.throws(() => type.string(new String('abc')));
+  t.throws(() => type.string(12));
+  t.throws(() => type.string(true));
+  t.throws(() => type.string(false));
+  t.throws(() => type.string({}));
+  t.throws(() => type.string([]));
+  t.throws(() => type.string(null));
+  t.throws(() => type.string(undefined));
+});
 
-let failures = 0;
+test('strings', (t) => {
+  t.notThrows(() => type.strings(['abc', 'def']));
+  t.notThrows(() => type.strings([]));
+  t.throws(() => type.strings({}));
+  t.throws(() => type.strings({ 0: 'abc', 1: 'def' }));
+  t.throws(() => type.strings(['abc', 12]));
+  t.throws(() => type.strings(null));
+  t.throws(() => type.strings(undefined));
+});
 
-const notThrows = (f) => {
-  try {
-    f();
-    console.log('- PASSED');
-  } catch (e) {
-    console.log('- FAILED', e.message);
-    failures += 1;
-  }
-};
+test('number', (t) => {
+  t.notThrows(() => type.number(1));
+  t.notThrows(() => type.number(-2));
+  t.notThrows(() => type.number(5.15));
+  t.notThrows(() => type.number(0));
+  t.throws(() => type.number(NaN));
+  t.throws(() => type.number(Infinity));
+  t.throws(() => type.number('abc'));
+  t.throws(() => type.number('12'));
+  t.throws(() => type.number('0'));
+  t.throws(() => type.number(''));
+  t.throws(() => type.number(new Number(5)));
+  t.throws(() => type.number(true));
+  t.throws(() => type.number(false));
+  t.throws(() => type.number({}));
+  t.throws(() => type.number([]));
+  t.throws(() => type.number(null));
+  t.throws(() => type.number(undefined));
+});
 
-const throws = (f) => {
-  try {
-    f();
-    throw new Error('TEST_FAILED');
-  } catch (e) {
-    if (e.message === 'TEST_FAILED') {
-      console.log('- FAILED', 'must throw an error, but did not');
-      failures += 1;
-    } else {
-      console.log('- PASSED');
-    }
-  }
-};
+test('numbers', (t) => {
+  t.notThrows(() => type.numbers([5, 7]));
+  t.throws(() => type.numbers([5, '7']));
+});
 
-console.log('string');
-notThrows(() => type.string('abc'));
-notThrows(() => type.string(''));
-throws(() => type.string(new String('abc')));
-throws(() => type.string(12));
-throws(() => type.string(true));
-throws(() => type.string(false));
-throws(() => type.string({}));
-throws(() => type.string([]));
-throws(() => type.string(null));
-throws(() => type.string(undefined));
+test('boolean', (t) => {
+  t.notThrows(() => type.boolean(false));
+  t.notThrows(() => type.boolean(true));
+  t.throws(() => type.boolean(0));
+  t.throws(() => type.boolean(''));
+  t.throws(() => type.boolean(1));
+  t.throws(() => type.boolean([]));
+  t.throws(() => type.boolean({}));
+  t.throws(() => type.boolean(null));
+  t.throws(() => type.boolean(undefined));
+  t.throws(() => type.boolean(NaN));
+  t.throws(() => type.boolean(Infinity));
+});
 
-console.log('strings');
-notThrows(() => type.strings(['abc', 'def']));
-notThrows(() => type.strings([]));
-throws(() => type.strings({}));
-throws(() => type.strings({ 0: 'abc', 1: 'def' }));
-throws(() => type.strings(['abc', 12]));
-throws(() => type.strings(null));
-throws(() => type.strings(undefined));
+test('booleans', (t) => {
+  t.notThrows(() => type.booleans([false, true]));
+  t.notThrows(() => type.booleans([]));
+  t.throws(() => type.booleans([false, 0]));
+});
 
-console.log('number');
-notThrows(() => type.number(1));
-notThrows(() => type.number(-2));
-notThrows(() => type.number(5.15));
-notThrows(() => type.number(0));
-throws(() => type.number(NaN));
-throws(() => type.number(Infinity));
-throws(() => type.number('abc'));
-throws(() => type.number('12'));
-throws(() => type.number('0'));
-throws(() => type.number(''));
-throws(() => type.number(new Number(5)));
-throws(() => type.number(true));
-throws(() => type.number(false));
-throws(() => type.number({}));
-throws(() => type.number([]));
-throws(() => type.number(null));
-throws(() => type.number(undefined));
+test('object', (t) => {
+  t.notThrows(() => type.object({ a: 5, b: false }));
+  t.notThrows(() => type.object({}));
+  t.notThrows(() => type.object([]));
+  t.notThrows(() => type.object(new Map()));
+  t.notThrows(() => type.object(new Set()));
+  t.notThrows(() => type.object(new Boolean()));
+  t.throws(() => type.object(1));
+  t.throws(() => type.object(true));
+  t.throws(() => type.object('{}'));
+  t.throws(() => type.object(null));
+  t.throws(() => type.object(undefined));
+  t.throws(() => type.object(NaN));
+  t.throws(() => type.object(Infinity));
+});
 
-console.log('numbers');
-notThrows(() => type.numbers([5, 7]));
-throws(() => type.numbers([5, '7']));
-
-console.log('boolean');
-notThrows(() => type.boolean(false));
-notThrows(() => type.boolean(true));
-throws(() => type.boolean(0));
-throws(() => type.boolean(''));
-throws(() => type.boolean(1));
-throws(() => type.boolean([]));
-throws(() => type.boolean({}));
-throws(() => type.boolean(null));
-throws(() => type.boolean(undefined));
-throws(() => type.boolean(NaN));
-throws(() => type.boolean(Infinity));
-
-console.log('booleans');
-notThrows(() => type.booleans([false, true]));
-notThrows(() => type.booleans([]));
-throws(() => type.booleans([false, 0]));
-
-console.log('object');
-notThrows(() => type.object({ a: 5, b: false }));
-notThrows(() => type.object({}));
-notThrows(() => type.object([]));
-notThrows(() => type.object(new Map()));
-notThrows(() => type.object(new Set()));
-notThrows(() => type.object(new Boolean()));
-throws(() => type.object(1));
-throws(() => type.object(true));
-throws(() => type.object('{}'));
-throws(() => type.object(null));
-throws(() => type.object(undefined));
-throws(() => type.object(NaN));
-throws(() => type.object(Infinity));
-
-console.log('objects');
-notThrows(() => type.objects([{ a: 5 }, {}]));
-notThrows(() => type.objects([]));
-throws(() => type.objects([{ a: 5 }, {}, null]));
-
-if (failures) {
-  process.exit(1);
-} else {
-  process.exit(0);
-}
+test('objects', (t) => {
+  t.notThrows(() => type.objects([{ a: 5 }, {}]));
+  t.notThrows(() => type.objects([]));
+  t.throws(() => type.objects([{ a: 5 }, {}, null]));
+});

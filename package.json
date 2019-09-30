@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "eslint",
-    "test": "node --experimental-modules test/type.test.js"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -26,12 +26,14 @@
   },
   "homepage": "https://github.com/agte/type#readme",
   "devDependencies": {
+    "ava": "^2.4.0",
     "eslint": "^6.5.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "esm": "^3.2.25"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.4.0"
   },
   "type": "module",
   "eslintConfig": {
@@ -49,7 +51,22 @@
       "sourceType": "module"
     },
     "rules": {
-      "import/extensions": ["error", "ignorePackages"]
+      "import/extensions": [
+        "error",
+        "ignorePackages"
+      ]
     }
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ],
+    "testOptions": {
+      "presets": [
+        ["module:ava/stage-4", {"modules": false}]
+      ]
+    },
+    "babel": false,
+    "compileEnhancements": false
   }
 }
