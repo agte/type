@@ -4,6 +4,7 @@
   "description": "Simple type check library",
   "main": "index.js",
   "directories": {
+    "lib": "src",
     "test": "test"
   },
   "scripts": {
@@ -13,14 +14,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agte/type.git"
+    "url": "git@github.com:agte/type.git"
   },
   "keywords": [
     "type",
     "check",
     "validation"
   ],
-  "author": "Anna Agte <matiasrustagte@gmail.com>",
+  "author": {
+    "name": "Anna Agte",
+    "email": "matiasrustagte@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/agte/type/issues"
