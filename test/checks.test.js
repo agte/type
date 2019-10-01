@@ -15,14 +15,17 @@ test('string', (t) => {
   t.throws(() => type.string(undefined));
 });
 
-test('strings', (t) => {
-  t.notThrows(() => type.strings(['abc', 'def']));
-  t.notThrows(() => type.strings([]));
-  t.throws(() => type.strings({}));
-  t.throws(() => type.strings({ 0: 'abc', 1: 'def' }));
-  t.throws(() => type.strings(['abc', 12]));
-  t.throws(() => type.strings(null));
-  t.throws(() => type.strings(undefined));
+test('non empty string', (t) => {
+  t.notThrows(() => type.nonEmptyString('abc'));
+  t.throws(() => type.nonEmptyString(''));
+  t.throws(() => type.nonEmptyString(new String('abc')));
+  t.throws(() => type.nonEmptyString(12));
+  t.throws(() => type.nonEmptyString(true));
+  t.throws(() => type.nonEmptyString(false));
+  t.throws(() => type.nonEmptyString({}));
+  t.throws(() => type.nonEmptyString([]));
+  t.throws(() => type.nonEmptyString(null));
+  t.throws(() => type.nonEmptyString(undefined));
 });
 
 test('number', (t) => {
@@ -45,9 +48,24 @@ test('number', (t) => {
   t.throws(() => type.number(undefined));
 });
 
-test('numbers', (t) => {
-  t.notThrows(() => type.numbers([5, 7]));
-  t.throws(() => type.numbers([5, '7']));
+test('integer', (t) => {
+  t.notThrows(() => type.integer(1));
+  t.notThrows(() => type.integer(-2));
+  t.throws(() => type.integer(5.15));
+  t.notThrows(() => type.integer(0));
+  t.throws(() => type.integer(NaN));
+  t.throws(() => type.integer(Infinity));
+  t.throws(() => type.integer('abc'));
+  t.throws(() => type.integer('12'));
+  t.throws(() => type.integer('0'));
+  t.throws(() => type.integer(''));
+  t.throws(() => type.integer(new Number(5)));
+  t.throws(() => type.integer(true));
+  t.throws(() => type.integer(false));
+  t.throws(() => type.integer({}));
+  t.throws(() => type.integer([]));
+  t.throws(() => type.integer(null));
+  t.throws(() => type.integer(undefined));
 });
 
 test('boolean', (t) => {
@@ -64,12 +82,6 @@ test('boolean', (t) => {
   t.throws(() => type.boolean(Infinity));
 });
 
-test('booleans', (t) => {
-  t.notThrows(() => type.booleans([false, true]));
-  t.notThrows(() => type.booleans([]));
-  t.throws(() => type.booleans([false, 0]));
-});
-
 test('object', (t) => {
   t.notThrows(() => type.object({ a: 5, b: false }));
   t.notThrows(() => type.object({}));
@@ -84,10 +96,4 @@ test('object', (t) => {
   t.throws(() => type.object(undefined));
   t.throws(() => type.object(NaN));
   t.throws(() => type.object(Infinity));
-});
-
-test('objects', (t) => {
-  t.notThrows(() => type.objects([{ a: 5 }, {}]));
-  t.notThrows(() => type.objects([]));
-  t.throws(() => type.objects([{ a: 5 }, {}, null]));
 });

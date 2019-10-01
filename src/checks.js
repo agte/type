@@ -1,86 +1,41 @@
 const msg = (expected, got) => (got ? `expected ${expected}, got ${got}` : `expected ${expected}`);
 
-const isString = (value) => typeof value === 'string';
-const isNumber = (value) => typeof value === 'number' && Number.isFinite(value);
-const isBoolean = (value) => typeof value === 'boolean';
-const isObject = (value) => typeof value === 'object' && value !== null;
-
 export default {
   string(value) {
-    if (!isString(value)) {
+    if (typeof value !== 'string') {
       throw new TypeError(msg('string', `(${typeof value}) ${value}`));
     }
   },
-  strings(value) {
-    if (!Array.isArray(value)) {
-      throw new TypeError(msg('array', `(${typeof value}) ${value}`));
-    }
-    if (!value.every((item) => isString(item))) {
-      throw new TypeError(msg('only strings'));
+  nonEmptyString(value) {
+    this.string(value);
+    if (value.length === 0) {
+      throw new TypeError(msg('non empty string', '(string) ""'));
     }
   },
-
   number(value) {
-    if (!isNumber(value)) {
+    if (typeof value !== 'number' || !Number.isFinite(value)) {
       throw new TypeError(msg('number', `(${typeof value}) ${value}`));
     }
   },
-  numbers(value) {
-    if (!Array.isArray(value)) {
-      throw new TypeError(msg('array', `(${typeof value}) ${value}`));
-    }
-    if (!value.every((item) => isNumber(item))) {
-      throw new TypeError(msg('only numbers'));
+  integer(value) {
+    this.number(value);
+    if (!Number.isInteger(value)) {
+      throw new TypeError(msg('integer', `(number) ${value}`));
     }
   },
-
   boolean(value) {
-    if (!isBoolean(value)) {
+    if (typeof value !== 'boolean') {
       throw new TypeError(msg('boolean', `(${typeof value}) ${value}`));
     }
   },
-  booleans(value) {
+  array(value) {
     if (!Array.isArray(value)) {
       throw new TypeError(msg('array', `(${typeof value}) ${value}`));
     }
-    if (!value.every((item) => isBoolean(item))) {
-      throw new TypeError(msg('only booleans'));
-    }
   },
-
   object(value) {
-    if (!isObject(value)) {
+    if (typeof value !== 'object' || value === null) {
       throw new TypeError(msg('object', `(${typeof value}) ${value}`));
     }
   },
-  objects(value) {
-    if (!Array.isArray(value)) {
-      throw new TypeError(msg('array', typeof value));
-    }
-    if (!value.every((item) => isObject(item))) {
-      throw new TypeError(msg('only objects'));
-    }
-  },
-
-  // instance(value, constructor) {
-  //   if (typeof value !== 'object' || !(value instanceof constructor)) {
-  //     throw new TypeError(msg(`instance of class "${constructor.name}"`, typeof value));
-  //   }
-  // },
-  // instances(value, constructor) {
-  //   if (Array.isArray(value)) {
-  //     throw new TypeError(msg('array', typeof value));
-  //   }
-  //   if (!value.every(item => typeof item === 'object' && item instanceof constructor)) {
-  //     throw new TypeError(`only instances of class ${constructor.name}`);
-  //   }
-  // },
-  // inheritor(value, ancestor) {
-  //   if (typeof value !== 'function') {
-  //     throw new TypeError(msg('class', typeof value));
-  //   }
-  //   if (value !== ancestor && !Object.prototype.isPrototypeOf.call(ancestor, value)) {
-  //     throw new TypeError(msg(`inheritor of class ${ancestor.name} or class itself`));
-  //   }
-  // },
 };

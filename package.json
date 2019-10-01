@@ -1,8 +1,11 @@
 {
   "name": "@agte/type",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple type check library",
-  "main": "index.js",
+  "type": "module",
+  "main": "./src/checks.js",
+  "exports": {
+  },
   "directories": {
     "lib": "src",
     "test": "test"
@@ -40,7 +43,6 @@
   "engines": {
     "node": ">=12.4.0"
   },
-  "type": "module",
   "eslintConfig": {
     "env": {
       "es6": true,
