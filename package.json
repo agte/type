@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint .",
     "format": "eslint --fix .",
-    "test": "ava"
+    "test": "ava test/*"
   },
   "repository": {
     "type": "git",
