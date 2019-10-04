@@ -1,4 +1,4 @@
-/* eslint-disable no-new-wrappers */
+/* eslint-disable no-new-wrappers, max-classes-per-file */
 import test from 'ava';
 import type from '../index.js';
 
@@ -96,4 +96,22 @@ test('object', (t) => {
   t.throws(() => type.object(undefined));
   t.throws(() => type.object(NaN));
   t.throws(() => type.object(Infinity));
+});
+
+test('function', (t) => {
+  t.throws(() => type.function({}));
+  t.throws(() => type.function([]));
+  t.throws(() => type.function(new Map()));
+  t.throws(() => type.function(class {}));
+  t.notThrows(() => type.function(function a() {})); // eslint-disable-line prefer-arrow-callback
+  t.notThrows(() => type.function(() => {}));
+});
+
+test('class', (t) => {
+  t.throws(() => type.class({}));
+  t.throws(() => type.class([]));
+  t.throws(() => type.class(new Map()));
+  t.throws(() => type.class(function a() {})); // eslint-disable-line prefer-arrow-callback
+  t.throws(() => type.class(() => {}));
+  t.notThrows(() => type.class(class {}));
 });
