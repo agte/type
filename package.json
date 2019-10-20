@@ -4,8 +4,6 @@
   "description": "Simple type check library",
   "type": "module",
   "main": "./src/checks.js",
-  "exports": {
-  },
   "directories": {
     "lib": "src",
     "test": "test"
