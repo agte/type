@@ -1,1 +1,1 @@
-export { default } from './src/checks.js';
+export { default as assert } from './src/assert.js';

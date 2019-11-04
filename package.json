@@ -1,9 +1,9 @@
 {
   "name": "@agte/type",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Simple type check library",
   "type": "module",
-  "main": "./src/checks.js",
+  "main": "./index.js",
   "directories": {
     "lib": "src",
     "test": "test"
@@ -20,6 +20,8 @@
   "keywords": [
     "type",
     "check",
+    "assert",
+    "runtime",
     "validation"
   ],
   "author": {
