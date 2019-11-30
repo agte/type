@@ -1,17 +1,20 @@
 {
   "name": "@agte/type",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple type check library",
   "type": "module",
-  "main": "./index.js",
+  "exports": {
+    "./mustBe": "./lib/mustBe.js"
+  },
   "directories": {
-    "lib": "src",
+    "lib": "lib",
     "test": "test"
   },
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
-    "lint": "eslint .",
-    "format": "eslint --fix .",
-    "test": "ava test/*"
+    "test": "node test/index.js"
   },
   "repository": {
     "type": "git",
@@ -33,52 +36,7 @@
     "url": "https://github.com/agte/type/issues"
   },
   "homepage": "https://github.com/agte/type#readme",
-  "devDependencies": {
-    "ava": "^2.4.0",
-    "eslint": "^6.5.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "esm": "^3.2.25"
-  },
   "engines": {
-    "node": ">=12.4.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "extends": "airbnb-base",
-    "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-    },
-    "rules": {
-      "import/extensions": [
-        "error",
-        "ignorePackages"
-      ]
-    }
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ],
-    "testOptions": {
-      "presets": [
-        [
-          "module:ava/stage-4",
-          {
-            "modules": false
-          }
-        ]
-      ]
-    },
-    "babel": false,
-    "compileEnhancements": false
+    "node": ">=13.2.0"
   }
 }
