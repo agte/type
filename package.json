@@ -14,7 +14,8 @@
     "lib/*"
   ],
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "coverage": "c8 npm test"
   },
   "repository": {
     "type": "git",
@@ -38,5 +39,8 @@
   "homepage": "https://github.com/agte/type#readme",
   "engines": {
     "node": ">=13.2.0"
+  },
+  "devDependencies": {
+    "c8": "^6.0.1"
   }
 }
