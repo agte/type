@@ -3,6 +3,7 @@ import assert from 'assert';
 import mustBe from '../lib/mustBe.js';
 
 export default async () => {
+  // .string(value)
   assert.doesNotThrow(() => mustBe.string('abc'));
   assert.doesNotThrow(() => mustBe.string(''));
   assert.throws(() => mustBe.string(new String('abc')));
@@ -14,6 +15,7 @@ export default async () => {
   assert.throws(() => mustBe.string(null));
   assert.throws(() => mustBe.string(undefined));
 
+  // .nonEmptyString(value)
   assert.doesNotThrow(() => mustBe.nonEmptyString('abc'));
   assert.throws(() => mustBe.nonEmptyString(''));
   assert.throws(() => mustBe.nonEmptyString(new String('abc')));
@@ -25,6 +27,7 @@ export default async () => {
   assert.throws(() => mustBe.nonEmptyString(null));
   assert.throws(() => mustBe.nonEmptyString(undefined));
 
+  // .number(value)
   assert.doesNotThrow(() => mustBe.number(1));
   assert.doesNotThrow(() => mustBe.number(-2));
   assert.doesNotThrow(() => mustBe.number(5.15));
@@ -43,6 +46,7 @@ export default async () => {
   assert.throws(() => mustBe.number(null));
   assert.throws(() => mustBe.number(undefined));
 
+  // .integer(value)
   assert.doesNotThrow(() => mustBe.integer(1));
   assert.doesNotThrow(() => mustBe.integer(-2));
   assert.throws(() => mustBe.integer(5.15));
@@ -61,6 +65,7 @@ export default async () => {
   assert.throws(() => mustBe.integer(null));
   assert.throws(() => mustBe.integer(undefined));
 
+  // .boolean(value)
   assert.doesNotThrow(() => mustBe.boolean(false));
   assert.doesNotThrow(() => mustBe.boolean(true));
   assert.throws(() => mustBe.boolean(0));
@@ -73,6 +78,18 @@ export default async () => {
   assert.throws(() => mustBe.boolean(NaN));
   assert.throws(() => mustBe.boolean(Infinity));
 
+  // .array(value)
+  assert.throws(() => mustBe.array(1));
+  assert.throws(() => mustBe.array(true));
+  assert.throws(() => mustBe.array(null));
+  assert.throws(() => mustBe.array(undefined));
+  assert.throws(() => mustBe.array(NaN));
+  assert.throws(() => mustBe.array(Infinity));
+  assert.throws(() => mustBe.array(Array));
+  assert.doesNotThrow(() => mustBe.array(new Array()));
+  assert.doesNotThrow(() => mustBe.array([]));
+
+  // .object(value)
   assert.doesNotThrow(() => mustBe.object({ a: 5, b: false }));
   assert.doesNotThrow(() => mustBe.object({}));
   assert.doesNotThrow(() => mustBe.object([]));
@@ -87,6 +104,7 @@ export default async () => {
   assert.throws(() => mustBe.object(NaN));
   assert.throws(() => mustBe.object(Infinity));
 
+  // .function(value)
   assert.throws(() => mustBe.function({}));
   assert.throws(() => mustBe.function([]));
   assert.throws(() => mustBe.function(new Map()));
@@ -96,6 +114,7 @@ export default async () => {
   /* eslint-enable prefer-arrow-callback */
   assert.doesNotThrow(() => mustBe.function(() => {}));
 
+  // .class(value)
   assert.throws(() => mustBe.class({}));
   assert.throws(() => mustBe.class([]));
   assert.throws(() => mustBe.class(new Map()));
